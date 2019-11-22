@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="row mt-2">
+        <div class="col">
+            <div class="card">
+                <div class="card-header"><h5>Image Crop</h5></div>
+                <div class="card-body">
+                    <form #imageForm="ngForm">
+                        <div class="form-group">
+                            <label>Select Image</label>
+                            <input type="file" class="form-control" name="image" (change)="imageUpload($event)">
+                            <image-cropper
+                                [imageChangedEvent]="imageChangedEvent"
+                                [maintainAspectRatio]="true"
+                                [aspectRatio]="5/4"
+                                [resizeToWidth]="128"
+                                format="png"
+                                (imageCropped)="imageCropped($event)"
+                                (imageLoaded)="imageLoaded()"
+                                (cropperReady)="cropperReady()"
+                                (loadImagefailed)="loadImageFailed()"
+                            ></image-cropper>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col" *ngIf="croppedImage">
+            <div class="card">
+                <div class="card-header"><h5>Afted Cropped Image</h5></div>
+                <div class="card-body">
+                    <img src="{{ croppedImage }}" height="300px" width="300px">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

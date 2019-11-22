@@ -31,13 +31,12 @@ export class DragAndDropComponent implements OnInit {
     });
   }
 
-  droppedEvent(event: CdkDragDrop<any[]>){
-    /*if (event.previousContainer == event.container) {
-      moveItemInArray(this.userList, event.previousIndex, event.currentIndex);
-    } else {*/
-
-      transferArrayItem( this.userList, this.movedList, event.previousIndex, event.currentIndex);
-    // }
+  droppedEvent(event: CdkDragDrop<any>){
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem( event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+    }
   }
 
 }

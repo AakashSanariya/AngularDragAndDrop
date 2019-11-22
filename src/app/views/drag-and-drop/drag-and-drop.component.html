@@ -5,12 +5,12 @@
             <div class="card border-info"
                  cdkDropList
                  #old="cdkDropList"
-                 ([cdkDropListData])="userList"
-                 ([cdkDropListConnectedTo])="[new]"
+                 [cdkDropListData]="userList"
+                 [cdkDropListConnectedTo]="[new]"
                  (cdkDropListDropped)="droppedEvent($event)"
             >
                 <div class="card-header"><h5>User Listing Details</h5></div>
-                <div class="card-body" *ngFor="let user of userList" cdkDrag [cdkDragData]="user">
+                <div class="card-body" *ngFor="let user of userList" cdkDrag>
                     <div class="media userBorder">
                         <img src="{{ 'http://192.168.11.20/UserRegistration/public/' + user.image }}" class="align-self-center mr-3" style="width:60px">
                         <div class="media-body">
@@ -28,12 +28,13 @@
             <div class="card border-warning"
                  cdkDropList
                  #new="cdkDropList"
-                 ([cdkDropListData])="movedList"
-                 ([cdkDropListConnectedTo])="old"
+                 [cdkDropListData]="movedList"
+                 [cdkDropListConnectedTo]="old"
+                 (cdkDropListDropped)="droppedEvent($event)"
             >
                 <div class="card-header"><h5>Selected User Listing</h5></div>
                 <div *ngIf="movedList">
-                <div class="card-body" *ngFor="let userMoved of movedList" cdkDrag [cdkDragData]="userMoved">
+                <div class="card-body" *ngFor="let userMoved of movedList" cdkDrag>
                     <div class="media userBorder">
                         <img src="{{ 'http://192.168.11.20/UserRegistration/public/' + userMoved.image }}" class="align-self-center mr-3" style="width:60px">
                         <div class="media-body">

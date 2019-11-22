@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="row mt-2">
+
+        <div class="col">
+            <div class="card border-info"
+                 cdkDropList
+                 #old="cdkDropList"
+                 ([cdkDropListData])="userList"
+                 ([cdkDropListConnectedTo])="[new]"
+                 (cdkDropListDropped)="droppedEvent($event)"
+            >
+                <div class="card-header"><h5>User Listing Details</h5></div>
+                <div class="card-body" *ngFor="let user of userList" cdkDrag [cdkDragData]="user">
+                    <div class="media userBorder">
+                        <img src="{{ 'http://192.168.11.20/UserRegistration/public/' + user.image }}" class="align-self-center mr-3" style="width:60px">
+                        <div class="media-body">
+                            <h4>{{ user.firstName + ' ' + user.lastName }}</h4>
+                            <p>Email: {{ user.email }}</p>
+                            <p>Mobile No: {{ user.mobileNo }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer"><h5>User List</h5></div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card border-warning"
+                 cdkDropList
+                 #new="cdkDropList"
+                 ([cdkDropListData])="movedList"
+                 ([cdkDropListConnectedTo])="old"
+            >
+                <div class="card-header"><h5>Selected User Listing</h5></div>
+                <div *ngIf="movedList">
+                <div class="card-body" *ngFor="let userMoved of movedList" cdkDrag [cdkDragData]="userMoved">
+                    <div class="media userBorder">
+                        <img src="{{ 'http://192.168.11.20/UserRegistration/public/' + userMoved.image }}" class="align-self-center mr-3" style="width:60px">
+                        <div class="media-body">
+                            <h4>{{ userMoved.firstName + ' ' + userMoved.lastName }}</h4>
+                            <p>Email: {{ userMoved.email }}</p>
+                            <p>Mobile No: {{ userMoved.mobileNo }}</p>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="card-footer"><h5>Selected User List</h5></div>
+            </div>
+        </div>
+    </div>
+</div>

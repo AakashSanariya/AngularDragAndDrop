@@ -26,9 +26,9 @@ export class ImageCropComponent implements OnInit {
   }
 
   /*
-  * This three function gives always a defination
+  * This three function gives always a definition
   * because other wise it gives error
-  * by default function defination get
+  * by default function definition get
   * */
   imageLoaded(){
 

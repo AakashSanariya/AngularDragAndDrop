@@ -11,7 +11,7 @@
                             <image-cropper
                                 [imageChangedEvent]="imageChangedEvent"
                                 [maintainAspectRatio]="true"
-                                [aspectRatio]="5/4"
+                                [aspectRatio]="1/1"
                                 [resizeToWidth]="128"
                                 format="png"
                                 (imageCropped)="imageCropped($event)"
@@ -27,7 +27,7 @@
 
         <div class="col" *ngIf="croppedImage">
             <div class="card">
-                <div class="card-header"><h5>Afted Cropped Image</h5></div>
+                <div class="card-header"><h5>After Cropped Image</h5></div>
                 <div class="card-body">
                     <img src="{{ croppedImage }}" height="300px" width="300px">
                 </div>

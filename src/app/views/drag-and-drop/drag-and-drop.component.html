@@ -7,13 +7,14 @@
                  #old="cdkDropList"
                  [cdkDropListData]="userList"
                  [cdkDropListConnectedTo]="[new]"
-                 (cdkDropListDropped)="droppedEvent($event)"
+                 (cdkDropListExited)="exits($event)"
             >
                 <div class="card-header"><h5>User Listing Details</h5></div>
                 <div class="card-body" *ngFor="let user of userList" cdkDrag>
-                    <div class="media userBorder">
+                    <div class="userBorder media">
+                        <input type="checkbox" name="{{ user.id }}" class="align-self-center mr-3 regular-checkbox big-checkbox" value="{{ user.id }}" (change)="checkedArray($event)">
                         <img src="{{ 'http://192.168.11.20/UserRegistration/public/' + user.image }}" class="align-self-center mr-3" style="width:60px">
-                        <div class="media-body">
+                        <div class="media-body col-6">
                             <h4>{{ user.firstName + ' ' + user.lastName }}</h4>
                             <p>Email: {{ user.email }}</p>
                             <p>Mobile No: {{ user.mobileNo }}</p>
@@ -30,7 +31,7 @@
                  #new="cdkDropList"
                  [cdkDropListData]="movedList"
                  [cdkDropListConnectedTo]="old"
-                 (cdkDropListDropped)="droppedEvent($event)"
+                 (cdkDropListEntered)="entered($event)"
             >
                 <div class="card-header"><h5>Selected User Listing</h5></div>
                 <div *ngIf="movedList">
@@ -38,6 +39,9 @@
                     <div class="media userBorder">
                         <img src="{{ 'http://192.168.11.20/UserRegistration/public/' + userMoved.image }}" class="align-self-center mr-3" style="width:60px">
                         <div class="media-body">
+                            <button type="button" class="close btn btn-danger" aria-label="Close" (click)="removeSelected(userMoved.id)" >
+                                <span>&times;</span>
+                            </button>
                             <h4>{{ userMoved.firstName + ' ' + userMoved.lastName }}</h4>
                             <p>Email: {{ userMoved.email }}</p>
                             <p>Mobile No: {{ userMoved.mobileNo }}</p>

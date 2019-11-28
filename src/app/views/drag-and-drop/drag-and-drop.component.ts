@@ -23,10 +23,10 @@ export class DragAndDropComponent implements OnInit {
       if (result['meta'].status_code === 200) {
         this.toaster.success(result['meta'].message);
         this.userList = result['data'].userDetails;
-        // console.log(this.userList);
+        console.log(this.userList);
       }
     }, error => {
-      if (error.meta.message) {
+      if (error.meta) {
         this.toaster.error(error['meta'].message);
       }
     });

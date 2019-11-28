@@ -1,0 +1,41 @@
+<div class="row m-2">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <h5>Upload Video Chunk</h5>
+            </div>
+            <div class="card-body">
+                <form #videoForm="ngForm" enctype="multipart/form-data" (ngSubmit)="videoForm.form.valid && onSubmit(videoForm.value)">
+                    <div class="form-group">
+                        <label>Video Name</label>
+                        <input type="text" class="form-control" name="videoName" #videoName="ngModel" [(ngModel)]="nameVideo" placeholder="Enter Video Name">
+                    </div>
+                    <div class="form-group">
+                        <label>Select Video</label>
+                        <input type="file" class="form-control" ng2FileSelect [uploader]="uploader" name="videoUpload" #videoUpload="ngModel" [(ngModel)]="video">
+                        <button class="mt-1 btn btn-outline-primary" (click)="uploader.uploadAll()">Upload</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col mt-2">
+        <div class="card">
+            <div class="card-header">
+                <h5>After Upload Video</h5>
+            </div>
+            <div class="card-body">
+                <div *ngFor="let item of uploader.queue">
+                    <div>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</div>
+                    <div>
+                        <div class="progress" style="height:30px">
+                            <div class="progress-bar" [ngStyle]="{'width': item.progress + '%', 'height': '30px'}"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

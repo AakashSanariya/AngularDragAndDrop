@@ -14,9 +14,12 @@ export class VideoUploadComponent implements OnInit {
   uploader = new FileUploader({
     url: Config.chunkVideo,
     authToken: 'Bearer ' + localStorage.getItem('token'),
-    disableMultipart: true,
-    chunkSize: (1024*1024), // 2Mb chunk in bytes
+    // disableMultipart : false,
+    autoUpload: true,
+    maxFileSize: (1024 * 1024 * 1024),
+    chunkSize: (1024 * 1024), // 2Mb chunk in bytes
     chunkMethod: 'POST',
+    allowedFileType: ['video']
   });
   response: string;
 
@@ -31,7 +34,7 @@ export class VideoUploadComponent implements OnInit {
 
     /* After Adding File */
     this.uploader.onAfterAddingFile = (file) => {
-      console.log('***** onAfterAddingFile ******')
+      console.log('***** onAfterAddingFile ******');
       console.log('file ', file)
     };
 
@@ -44,7 +47,7 @@ export class VideoUploadComponent implements OnInit {
 
     /* If Error Occurs While File Upload*/
     this.uploader.onErrorItem = (item, response, status, headers) => {
-      console.log(item);
+      console.log(item, response, status, headers);
       this.toaster.error("!Opps Some Error Occurs");
     };
 
@@ -52,6 +55,13 @@ export class VideoUploadComponent implements OnInit {
     this.uploader.onCompleteItem =  (item:any, response:any, status:any, headers:any) => {
       console.log('ImageUpload:uploaded :', item, status, response, headers);
       this.toaster.success("Video Upload Successfully")
+    };
+
+    /* Video Uploading Failed */
+    this.uploader.onWhenAddingFileFailed = (item: any, filter: any, options: any) => {
+      console.log('***** onWhenAddingFileFailed ********');
+      console.log(filter);
+      this.toaster.error("!Opps Error Occurs in " + filter.name);
     };
 
   }

@@ -1,3 +1,4 @@
+<!-- Ng 2 File Upload With Chunk-->
 <div class="row m-2">
     <div class="col">
         <div class="card">
@@ -33,6 +34,76 @@
                             <div class="progress-bar" [ngStyle]="{'width': item.progress + '%', 'height': '30px'}"></div>
                         </div>
 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Flow Js File Upload-->
+<div class="row m-2">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <h5>Ngx Flow File Upload</h5>
+            </div>
+            <form #videoForm="ngForm" (ngSubmit)="videoForm.form.valid && onSubmit(videoForm.value)">
+                <div class="card-body">
+                    <ng-container #flowAdvanced="flow" [flowConfig]="flowConfig"></ng-container>
+                    <div class="form-group">
+                        <label>Enter Video Name</label>
+                        <input type="text" name="videoName" class="form-control" #videoName="ngModel" [(ngModel)]="Name" minlength="3" required>
+                        <div class="alert alert-danger" *ngIf="videoForm.submitted && videoName.invalid">
+                            <div *ngIf="videoName.errors.required">Please Enter Video Name</div>
+                            <div *ngIf="videoName.errors.minlength">Video Name Should be minimum 3 Char.</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Select Video</label>
+                        <input type="hidden" name="videoUrl" #videoUrl="ngModel" [(ngModel)]="videoUrlData">
+                        <input type="file" class="form-control" flowButton [flow]="flowAdvanced.flowJs" [flowAttributes]="{accept: videoAccessType}">
+                    </div>
+                    <div class="form-group" *ngIf="fileUploadSuccess">
+                        <label></label>
+                        <input type="submit" class="btn btn-outline-success" value="Start Upload">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <h5>After Ngx Flow File Upload</h5>
+            </div>
+            <div class="card-body">
+                <div *ngFor="let transfer of (flowAdvanced.transfers$ | async).transfers;">
+                    <div class="row">
+                        <div class="col">Name: {{ transfer.name }}</div>
+                        <div class="col">
+                            <div class="progress">
+                                <div class="progress-bar" [style.width]="transfer.progress | percent"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">Time Remaining: {{ transfer.timeRemaining }}</div>
+                        <div class="col">Size: {{ transfer.size |number:'1.0' }}bytes</div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-warning">Paused: {{ transfer.paused }}</div>
+                        <div class="col text-primary">Success: {{ transfer.success }}</div>
+                        <div class="col text-success">Complete: {{ transfer.complete }}</div>
+                        <div class="col text-danger">Error: {{ transfer.error }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col"><button class="btn btn-outline-warning" (click)="flowAdvanced.pauseFile(transfer)">Pause</button></div>
+                        <div class="col"><button class="btn btn-outline-primary" (click)="flowAdvanced.resumeFile(transfer)">Resume</button></div>
+                        <div class="col"><button class="btn btn-outline-danger" (click)="flowAdvanced.cancelFile(transfer)">Cancel</button></div>
                     </div>
                 </div>
             </div>

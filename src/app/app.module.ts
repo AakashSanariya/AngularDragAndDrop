@@ -17,6 +17,9 @@ import {LoginComponent} from "./views/login/login.component";
 import {AuthguardGuard} from "./_guard/auth-guard.guard";
 import { NavbarComponent } from './container/navbar/navbar.component';
 import {FileUploadModule} from "ng2-file-uploading-with-chunk/index";
+import {NgxFlowModule, FlowInjectionToken} from "@flowjs/ngx-flow";
+import Flow from '@flowjs/flow.js';
+import { ListVideoComponent } from './views/list-video/list-video.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,7 @@ import {FileUploadModule} from "ng2-file-uploading-with-chunk/index";
     ImageCropComponent,
     VideoUploadComponent,
     NavbarComponent,
+    ListVideoComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,10 +41,12 @@ import {FileUploadModule} from "ng2-file-uploading-with-chunk/index";
     DragDropModule,
     ImageCropperModule,
     FileUploadModule,
+    NgxFlowModule,
   ],
   providers: [
       AuthguardGuard,
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: FlowInjectionToken, useValue: Flow }
   ],
   bootstrap: [AppComponent]
 })

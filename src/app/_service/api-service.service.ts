@@ -32,4 +32,16 @@ export class ApiServiceService {
     this.toaster.success("Logout Successfully.");
     this.router.navigate(['/login']);
   }
+  
+  videoUpload(payLoad){
+    return this.http.post(Config.chunkVideoUpload, payLoad).pipe(map(result => {
+      return result;
+    }));
+  }
+
+  getVideoList(videoDraw: any){
+    return this.http.post(Config.listVideo, videoDraw).pipe(map(result => {
+      return result;
+    }));
+  }
 }

@@ -5,6 +5,7 @@ import {ImageCropComponent} from "./views/image-crop/image-crop.component";
 import {VideoUploadComponent} from "./views/video-upload/video-upload.component";
 import {LoginComponent} from "./views/login/login.component";
 import {AuthguardGuard} from "./_guard/auth-guard.guard";
+import {ListVideoComponent} from "./views/list-video/list-video.component";
 
 
 const routes: Routes = [
@@ -30,6 +31,11 @@ const routes: Routes = [
   {
     path: 'videoupload',
     component: VideoUploadComponent,
+    canActivate: [AuthguardGuard]
+  },
+  {
+    path: 'listvideo',
+    component: ListVideoComponent,
     canActivate: [AuthguardGuard]
   }
 ];

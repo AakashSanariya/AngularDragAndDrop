@@ -1,0 +1,41 @@
+<div class="row m-2">
+    <div class="col mt-2">
+        <div class="card">
+            <div class="card-header">
+                <h5>Video Listing</h5>
+            </div>
+            <div class="card-body">
+                <table class="hover table table-bordered">
+                    <thead class="thead-light">
+                    <tr>
+                        <th>No</th>
+                        <th>video Name</th>
+                        <th>Video</th>
+                        <!--<th>Edit</th>
+                        <th>Delete</th>-->
+                    </tr>
+                    </thead>
+                    <tbody *ngIf="videoList?.length != 0">
+                    <tr *ngFor="let video of (videoList); let i = index">
+                        <td>{{ i+1 }}</td>
+                        <td>{{ video['videoName'] }}</td>
+                        <td width="320" height="240">
+                            <video width="320" height="240" controls>
+                                <source src="{{ 'http://192.168.11.20/UserRegistration/public/' + video['videoUrl'] }}" type="video/mp4">
+                                Sorry, your browser doesn't support embedded videos.
+                            </video>
+                        </td>
+                        <!--<td *ngIf="user['status'] == 0"><button class="btn btn-outline-info" (click)="openModal(statusModel, user['id'], user['status'])">Activate</button></td>
+                            <td *ngIf="user['status'] == 1"><button class="btn btn-outline-danger" (click)="openModal(statusModel, user['id'], user['status'])">DeActivate</button></td>-->
+                    </tr>
+                    </tbody>
+                    <tbody *ngIf="videoList?.length == 0">
+                    <tr>
+                        <td colspan="6" class="no-data-available">No Data Available</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

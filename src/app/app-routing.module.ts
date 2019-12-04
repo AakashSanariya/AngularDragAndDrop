@@ -6,6 +6,7 @@ import {VideoUploadComponent} from "./views/video-upload/video-upload.component"
 import {LoginComponent} from "./views/login/login.component";
 import {AuthguardGuard} from "./_guard/auth-guard.guard";
 import {ListVideoComponent} from "./views/list-video/list-video.component";
+import {ScrollingComponent} from "./views/scrolling/scrolling.component";
 
 
 const routes: Routes = [
@@ -36,6 +37,11 @@ const routes: Routes = [
   {
     path: 'listvideo',
     component: ListVideoComponent,
+    canActivate: [AuthguardGuard]
+  },
+  {
+    path: 'scrollinguser',
+    component: ScrollingComponent,
     canActivate: [AuthguardGuard]
   }
 ];

@@ -20,6 +20,9 @@ import {FileUploadModule} from "ng2-file-uploading-with-chunk/index";
 import {NgxFlowModule, FlowInjectionToken} from "@flowjs/ngx-flow";
 import Flow from '@flowjs/flow.js';
 import { ListVideoComponent } from './views/list-video/list-video.component';
+import { ScrollingComponent } from './views/scrolling/scrolling.component';
+import {ScrollingModule} from "@angular/cdk/scrolling";
+import {PlatformModule} from "@angular/cdk/platform";
 
 @NgModule({
   declarations: [
@@ -30,6 +33,7 @@ import { ListVideoComponent } from './views/list-video/list-video.component';
     VideoUploadComponent,
     NavbarComponent,
     ListVideoComponent,
+    ScrollingComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +46,8 @@ import { ListVideoComponent } from './views/list-video/list-video.component';
     ImageCropperModule,
     FileUploadModule,
     NgxFlowModule,
+    ScrollingModule,
+    PlatformModule,
   ],
   providers: [
       AuthguardGuard,

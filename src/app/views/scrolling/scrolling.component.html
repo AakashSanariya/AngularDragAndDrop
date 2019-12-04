@@ -1,0 +1,16 @@
+<div class="row m-2">
+    <div class="col mt-2">
+        <div class="card">
+            <div class="card-header">
+                <h5>Infinite Scrolling</h5>
+            </div>
+            <div class="card-body">
+                <cdk-virtual-scroll-viewport itemSize="5" class="example-viewport">
+                    <ul class="list-group" *cdkVirtualFor="let user of dataSource">
+                        <li class="list-group-item">{{ user.firstName + ' ' + user.lastName }}</li>
+                    </ul>
+                </cdk-virtual-scroll-viewport>
+            </div>
+        </div>
+    </div>
+</div>

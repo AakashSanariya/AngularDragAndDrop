@@ -27,7 +27,6 @@ export class ThumbnailVideoComponent implements OnInit {
   findPlayTime = (event) => {
     let totalPlayTime = event.target.duration;
     this.videoThumbService.generateThumbnails(this.videoFile, totalPlayTime).then(thumbnailData => {
-      console.log(thumbnailData);
       this.thumbnailData = thumbnailData['imagePath'];
     });
   };

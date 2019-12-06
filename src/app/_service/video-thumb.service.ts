@@ -23,26 +23,25 @@ export class VideoThumbService {
       canvas.addEventListener('error', reject);
       video.addEventListener('error', reject);
 
-      /* video Play and Make a Image Thumbnails in canvas
-      * Duration Change Event
+      /* when video loaded meta data
+      * than start making thumbnails
       * */
 
       video.addEventListener('loadedmetadata', () => {
         if(totalTime <= 120){
           this.snapShot = 3;
         }
-        // video.currentTime = (totalTime/this.snapShot);
-        // video.play();
-        this.drawImage = setInterval(makeThumbnail, 2000);
+        video.currentTime = (totalTime/this.snapShot);
+        this.drawImage = setInterval(makeThumbnail, 1000); // 2 sec Time Interval
       });
 
       const makeThumbnail = () => {
-        // video.play();
         this.snapShot--;
         if(this.snapShot == 0){
-          clearInterval(this.drawImage);
-          console.log(this.snapShot, "Interval Clear");
+          clearInterval(this.drawImage); // if Total snapshot (thumbnail) complete than remove
         }
+
+        /* Thumbnails Make */
         canvas.width = 150;
         canvas.height = 150;
         context.drawImage(video, 0, 0, 150, 150);
@@ -50,15 +49,12 @@ export class VideoThumbService {
         var img = new Image();
         img.src = canvas.toDataURL("image/png");
         this.thumbnail.push(img.src);
+
+        /* Current Time Change For New Image*/
         if(this.snapShot >0){
           video.currentTime = (totalTime/this.snapShot);
         }
-        console.log("thumbnails", this.snapShot)
       };
-
-      video.addEventListener('pause', () => {
-      });
-
 
       /* Set Video type Attributes */
       if(videoFile.type){
@@ -71,8 +67,6 @@ export class VideoThumbService {
         'imagePath': this.thumbnail
       })
     });
-    console.log(this.thumbnail);
     return akash;
-  }
-  
+  };
 }

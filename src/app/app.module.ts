@@ -23,6 +23,7 @@ import { ListVideoComponent } from './views/list-video/list-video.component';
 import { ScrollingComponent } from './views/scrolling/scrolling.component';
 import {ScrollingModule} from "@angular/cdk/scrolling";
 import {PlatformModule} from "@angular/cdk/platform";
+import { ThumbnailVideoComponent } from './views/thumbnail-video/thumbnail-video.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import {PlatformModule} from "@angular/cdk/platform";
     NavbarComponent,
     ListVideoComponent,
     ScrollingComponent,
+    ThumbnailVideoComponent,
   ],
   imports: [
     BrowserModule,

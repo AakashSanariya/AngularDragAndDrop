@@ -7,6 +7,7 @@ import {LoginComponent} from "./views/login/login.component";
 import {AuthguardGuard} from "./_guard/auth-guard.guard";
 import {ListVideoComponent} from "./views/list-video/list-video.component";
 import {ScrollingComponent} from "./views/scrolling/scrolling.component";
+import {ThumbnailVideoComponent} from "./views/thumbnail-video/thumbnail-video.component";
 
 
 const routes: Routes = [
@@ -42,6 +43,11 @@ const routes: Routes = [
   {
     path: 'scrollinguser',
     component: ScrollingComponent,
+    canActivate: [AuthguardGuard]
+  },
+  {
+    path: 'videothumbnail',
+    component: ThumbnailVideoComponent,
     canActivate: [AuthguardGuard]
   }
 ];
